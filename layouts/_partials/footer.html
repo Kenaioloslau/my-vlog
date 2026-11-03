@@ -1,0 +1,12 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© {{ now.Format "2006" }} {{ .Site.Params.author }} · 用 <a href="https://gohugo.io">Hugo</a> 构建</span>
+    <nav aria-label="页脚导航">
+      <a href="{{ "index.xml" | relURL }}">RSS 订阅</a>
+      <a href="https://github.com/" rel="noopener">GitHub</a>
+    </nav>
+    {{- with .Site.Params.icp }}
+      <span class="icp"><a href="https://beian.miit.gov.cn/" rel="nofollow noopener">{{ . }}</a></span>
+    {{- end }}
+  </div>
+</footer>

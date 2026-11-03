@@ -1,0 +1,53 @@
+{{ define "main" }}
+{{- /* 找出同栏目里前后两期，用来做上下期导航 */ -}}
+{{- $all := (site.GetPage .Section).Pages.ByDate.Reverse -}}
+{{- $newer := "" -}}
+{{- $older := "" -}}
+{{- range $i, $p := $all -}}
+  {{- if eq $p.RelPermalink $.RelPermalink -}}
+    {{- if gt $i 0 }}{{ $newer = index $all (sub $i 1) }}{{ end -}}
+    {{- if lt $i (sub (len $all) 1) }}{{ $older = index $all (add $i 1) }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+
+<article class="wrap">
+  <div class="page-head">
+    <h1>{{ .Title }}</h1>
+    <div class="page-meta">
+      <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "2006 年 1 月 2 日" }}</time>
+      {{- with .Params.location }}<span>📍 {{ . }}</span>{{ end }}
+      {{- with .Params.duration }}<span>⏱ {{ . }}</span>{{ end }}
+    </div>
+    {{- with .Params.tags }}
+      <div class="tags">
+        {{- range . }}<span class="tag">#{{ . }}</span>{{ end }}
+      </div>
+    {{- end }}
+  </div>
+
+  {{ partial "video-player.html" . }}
+
+  <div class="prose">
+    {{ .Content }}
+  </div>
+
+  {{- if or $newer $older }}
+    <nav class="pager" aria-label="上一篇 / 下一篇">
+      {{- with $older }}
+        <a href="{{ .RelPermalink }}">
+          <span class="label">← 更早</span>
+          {{ .Title }}
+        </a>
+      {{- else }}<span></span>{{ end }}
+      {{- with $newer }}
+        <a class="next" href="{{ .RelPermalink }}">
+          <span class="label">更新 →</span>
+          {{ .Title }}
+        </a>
+      {{- else }}<span></span>{{ end }}
+    </nav>
+  {{- end }}
+
+  {{ partial "giscus.html" . }}
+</article>
+{{ end }}

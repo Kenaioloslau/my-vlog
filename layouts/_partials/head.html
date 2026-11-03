@@ -1,0 +1,28 @@
+{{- $desc := .Params.description | default .Site.Params.description -}}
+{{- $title := cond .IsHome .Site.Title (printf "%s · %s" .Title .Site.Title) -}}
+{{- $canonical := .Permalink -}}
+{{- $css := resources.Get "css/main.css" | minify | fingerprint -}}
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ $title }}</title>
+  <meta name="description" content="{{ $desc }}" />
+  <link rel="canonical" href="{{ $canonical }}" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ "index.xml" | absURL }}" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="{{ .Site.Title }}" />
+  <meta property="og:title" content="{{ $title }}" />
+  <meta property="og:description" content="{{ $desc }}" />
+  <meta property="og:url" content="{{ $canonical }}" />
+  {{- with .Params.cover }}
+  <meta property="og:image" content="{{ partial "media-url.html" . | absURL }}" />
+  {{- end }}
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="theme-color" content="#fdfcfa" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#16151a" media="(prefers-color-scheme: dark)" />
+  <meta name="generator" content="Hugo {{ hugo.Version }}" />
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+</head>

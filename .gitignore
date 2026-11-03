@@ -1,0 +1,12 @@
+# 构建产物（Hugo 自动生成，不需要提交）
+public/
+resources/
+.hugo_build.lock
+
+# 系统与编辑器垃圾文件
+.DS_Store
+.vscode/
+.idea/
+
+# 环境变量（放密钥的文件，绝不能提交）
+.env

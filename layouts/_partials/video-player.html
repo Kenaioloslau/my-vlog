@@ -1,0 +1,54 @@
+{{- /* 播放器：根据 frontmatter 里的 video.type 自动选择
+       type: bilibili -> 填 bvid
+       type: r2       -> 填 src
+       type: youtube  -> 填 id                          */ -}}
+{{- $v := .Params.video | default dict -}}
+{{- $type := $v.type | default "bilibili" -}}
+{{- $title := .Title -}}
+
+{{- if and (eq $type "bilibili") $v.bvid }}
+  <div class="player">
+    <iframe
+      src="https://player.bilibili.com/player.html?bvid={{ $v.bvid }}&page=1&high_quality=1&danmaku=0&autoplay=0"
+      title="{{ $title }}"
+      loading="lazy"
+      allowfullscreen
+      referrerpolicy="no-referrer"
+    ></iframe>
+  </div>
+{{- else if and (eq $type "youtube") $v.id }}
+  <div class="player">
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/{{ $v.id }}"
+      title="{{ $title }}"
+      loading="lazy"
+      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      referrerpolicy="strict-origin-when-cross-origin"
+    ></iframe>
+  </div>
+{{- else if and (eq $type "r2") $v.src }}
+  {{- $isRemote := or (hasPrefix $v.src "http") (hasPrefix $v.src "/") -}}
+  {{- if and (not $isRemote) (not site.Params.mediaBase) }}
+    <div class="player-hint">
+      ⚠️ 这期用的是自己托管的视频，但还没有配置 Cloudflare R2 地址。请在
+      <code>hugo.toml</code> 的 <code>[params]</code> 里填写 <code>mediaBase</code>，
+      或者把 <code>video.src</code> 改成以 <code>/</code> 开头的本地文件路径。
+    </div>
+  {{- else }}
+    {{- $src := partial "media-url.html" $v.src -}}
+    {{- $poster := "" -}}
+    {{- with $v.poster }}{{ $poster = partial "media-url.html" . }}{{ end -}}
+    <div class="player">
+      <video controls playsinline preload="metadata"{{ with $poster }} poster="{{ . }}"{{ end }}>
+        <source src="{{ $src }}" type="video/mp4" />
+        你的浏览器不支持内嵌视频播放，可以<a href="{{ $src }}">点这里直接播放</a>。
+      </video>
+    </div>
+  {{- end }}
+{{- else }}
+  <div class="player-hint">
+    ⚠️ 这期内容的视频还没配置好。请在这篇文章开头的 frontmatter 里填写
+    <code>video.bvid</code>（B 站）或 <code>video.src</code>（R2 文件路径）。
+  </div>
+{{- end }}

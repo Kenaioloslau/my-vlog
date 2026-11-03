@@ -1,0 +1,14 @@
+{{- /* 把短路径（videos/a.mp4）拼成完整地址：
+       以 http 开头 -> 原样返回
+       以 / 开头     -> 当作本机 static 里的文件
+       其他          -> 拼上 Cloudflare R2 的域名（site.Params.mediaBase） */ -}}
+{{- $p := . -}}
+{{- if or (hasPrefix $p "http://") (hasPrefix $p "https://") -}}
+  {{- $p -}}
+{{- else if hasPrefix $p "/" -}}
+  {{- $p -}}
+{{- else if site.Params.mediaBase -}}
+  {{- printf "%s/%s" (strings.TrimRight "/" site.Params.mediaBase) $p -}}
+{{- else -}}
+  {{- printf "/%s" $p -}}
+{{- end -}}

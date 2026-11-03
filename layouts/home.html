@@ -1,0 +1,34 @@
+{{ define "main" }}
+{{- $pages := where site.RegularPages "Section" "videos" -}}
+{{- $latest := first 6 $pages -}}
+<div class="wrap">
+  <section class="hero">
+    <h1>把日子拍下来，<br />就不算白过。</h1>
+    <p>{{ site.Params.description }}</p>
+    <div class="meta">
+      <span>已更新 {{ len $pages }} 期</span>
+      {{- with index $latest 0 }}
+        <span>最近更新 {{ .Date.Format "2006 年 1 月" }}</span>
+      {{- end }}
+      <a href="{{ "index.xml" | relURL }}">RSS 订阅</a>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <h2>最新</h2>
+    <a href="{{ "videos/" | relURL }}">查看全部 →</a>
+  </div>
+
+  {{- if $latest }}
+    <div class="grid">
+      {{- range $latest }}
+        {{ partial "video-card.html" . }}
+      {{- end }}
+    </div>
+  {{- else }}
+    <div class="empty-state">
+      还没有内容。去 <code>content/videos/</code> 里新建一个 <code>.md</code> 文件，就有一期了。
+    </div>
+  {{- end }}
+</div>
+{{ end }}

@@ -1,0 +1,67 @@
+# ============================================================
+#  网站总配置文件 —— 新手只需要改这个文件里的几行
+#  改完保存，运行 hugo server 就能看到效果
+# ============================================================
+
+# ⚠️ 上线前改成你的真实域名（结尾要带 /）
+baseURL = "https://example.com/"
+locale = "zh-CN"
+defaultContentLanguage = "zh"
+title = "風與海的傳說"
+
+# 我们自己写了 static/robots.txt，所以不让 Hugo 自动生成
+enableRobotsTXT = false
+
+# 关掉标签分类页，减少页面数量（标签仍然可以在文章里显示）
+disableKinds = ["taxonomy", "term"]
+
+# 每页显示多少个视频
+[pagination]
+  pagerSize = 12
+
+[markup]
+  [markup.goldmark.renderer]
+    # 允许在 Markdown 里直接写 HTML（比如嵌入播放器）
+    unsafe = true
+  [markup.highlight]
+    style = "github-dark"
+    noClasses = false
+
+# ============================================================
+#  下面这些是「网站信息」，改完全站生效
+# ============================================================
+[params]
+  description = "记录生活点滴，留存珍贵瞬间"
+  author = "St.Kenrith"
+
+  # 评论系统 Giscus：四个值都填了才会显示评论区
+  # 怎么拿到这四个值，见项目根目录的 README.md
+  giscusRepo = ""
+  giscusRepoId = ""
+  giscusCategory = "General"
+  giscusCategoryId = ""
+
+  # Cloudflare R2 的公开访问地址，例如 "https://media.你的域名.com"
+  # 填了之后，文章里写 videos/xxx.mp4 就会自动拼成完整地址
+  mediaBase = ""
+
+  # 如果放在中国大陆服务器，填备案号；否则留空
+  icp = ""
+
+# ============================================================
+#  顶部导航菜单
+# ============================================================
+[[menu.main]]
+  name = "首页"
+  pageRef = "/"
+  weight = 10
+
+[[menu.main]]
+  name = "全部视频"
+  pageRef = "/videos"
+  weight = 20
+
+[[menu.main]]
+  name = "关于我"
+  pageRef = "/about"
+  weight = 30

@@ -1,0 +1,33 @@
+{{- /* 评论区（Giscus）。hugo.toml 里四个 giscus 值都填了才显示。 */ -}}
+{{- $c := .Site.Params -}}
+{{- if and $c.giscusRepo $c.giscusRepoId $c.giscusCategoryId }}
+  <section class="comments">
+    <h2>留言</h2>
+    <div class="giscus"></div>
+    <script
+      src="https://giscus.app/client.js"
+      data-repo="{{ $c.giscusRepo }}"
+      data-repo-id="{{ $c.giscusRepoId }}"
+      data-category="{{ $c.giscusCategory }}"
+      data-category-id="{{ $c.giscusCategoryId }}"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async
+    ></script>
+  </section>
+{{- else if hugo.IsServer }}
+  <section class="comments">
+    <h2>留言</h2>
+    <div class="player-hint">
+      评论区还没开启。打开 <code>hugo.toml</code>，把 <code>giscusRepo</code> / <code>giscusRepoId</code> /
+      <code>giscusCategoryId</code> 三个值填上即可（怎么拿到这些值见 README）。
+    </div>
+  </section>
+{{- end }}

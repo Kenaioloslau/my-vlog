@@ -1,0 +1,22 @@
+# Cloudflare Pages 专用的响应头配置
+# 文件放在 static/ 里，构建后会出现在网站根目录。
+# 语法：# 开头是注释，下面每段是「路径 + 该路径要加的响应头」。
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# 带内容哈希的静态资源，可以放心缓存一年（改了就换文件名，不会读旧缓存）
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# 图片和字体同样长期缓存
+/covers/*
+  Cache-Control: public, max-age=2592000
+
+# 更严格的内容安全策略（CSP）。
+# 默认关闭：如果你以后发现页面某个功能不工作，多半是它拦住了，删掉下面两行即可。
+# 开启方法：把下面两行前面的 # 去掉，然后重新部署。
+# /*  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://giscus.app; frame-src https://player.bilibili.com https://www.youtube-nocookie.com https://giscus.app; connect-src 'self' https://giscus.app; font-src 'self' data:

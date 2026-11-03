@@ -1,0 +1,23 @@
+{{- /* 视频卡片
+     调用方式：{{ partial "video-card.html" . }}（传一个 page 对象） */ -}}
+{{- $cover := .Params.cover -}}
+{{- $coverUrl := "" -}}
+{{- with $cover }}{{ $coverUrl = partial "media-url.html" . }}{{ end -}}
+<a class="card" href="{{ .RelPermalink }}">
+  <div class="card-cover">
+    {{- if $coverUrl }}
+      <img src="{{ $coverUrl }}" alt="{{ .Title }}" loading="lazy" decoding="async" />
+    {{- else }}
+      <div class="empty">暂无封面</div>
+    {{- end }}
+    {{- with .Params.duration }}<span class="badge">{{ . }}</span>{{ end }}
+  </div>
+  <div class="card-body">
+    <h3>{{ .Title }}</h3>
+    {{- with .Params.description }}<p>{{ . }}</p>{{ end }}
+    <div class="card-meta">
+      <span>{{ .Date.Format "2006-01-02" }}</span>
+      {{- with .Params.location }}<span>{{ . }}</span>{{ end }}
+    </div>
+  </div>
+</a>

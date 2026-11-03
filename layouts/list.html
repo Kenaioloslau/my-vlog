@@ -1,0 +1,27 @@
+{{ define "main" }}
+{{- $pages := .Pages.ByDate.Reverse -}}
+<div class="wrap">
+  <div class="page-head">
+    <h1>{{ .Title }}</h1>
+    <div class="page-meta">
+      <span>共 {{ len $pages }} 期</span>
+    </div>
+  </div>
+
+  {{- if $pages }}
+    {{- range $year := ($pages.GroupByDate "2006") }}
+      <div class="section-head">
+        <h2>{{ $year.Key }}</h2>
+        <span style="font-size:13px;color:var(--text-soft)">{{ len $year.Pages }} 期</span>
+      </div>
+      <div class="grid">
+        {{- range $year.Pages }}
+          {{ partial "video-card.html" . }}
+        {{- end }}
+      </div>
+    {{- end }}
+  {{- else }}
+    <div class="empty-state">还没有内容。</div>
+  {{- end }}
+</div>
+{{ end }}

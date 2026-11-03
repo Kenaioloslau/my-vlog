@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# 搜索引擎爬虫请勿抓取草稿页（草稿本来就不会被构建）
+Disallow: /drafts/
+
+# ⚠️ 上线后把下面这行换成你的真实域名
+Sitemap: https://example.com/sitemap.xml
