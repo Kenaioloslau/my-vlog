@@ -5,4 +5,4 @@ Allow: /
 Disallow: /drafts/
 
 # ⚠️ 上线后把下面这行换成你的真实域名
-Sitemap: https://example.com/sitemap.xml
+Sitemap: https://canaiolos.com/sitemap.xml
