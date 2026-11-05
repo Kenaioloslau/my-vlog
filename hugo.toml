@@ -53,16 +53,16 @@ disableKinds = ["taxonomy", "term"]
 #  顶部导航菜单
 # ============================================================
 [[menu.main]]
-  name = "首页"
+  name = "首頁"
   pageRef = "/"
   weight = 10
 
 [[menu.main]]
-  name = "全部视频"
+  name = "全部視頻"
   pageRef = "/videos"
   weight = 20
 
 [[menu.main]]
-  name = "关于我"
+  name = "關於我"
   pageRef = "/about"
   weight = 30
