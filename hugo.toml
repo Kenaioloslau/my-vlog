@@ -4,7 +4,7 @@
 # ============================================================
 
 # ⚠️ 上线前改成你的真实域名（结尾要带 /）
-baseURL = "https://example.com/"
+baseURL = "https://canaiolos.com/"
 locale = "zh-CN"
 defaultContentLanguage = "zh"
 title = "風與海的傳說"
@@ -31,6 +31,7 @@ disableKinds = ["taxonomy", "term"]
 #  下面这些是「网站信息」，改完全站生效
 # ============================================================
 [params]
+  mediaBase = "https://media.caiaiolos.com"
   description = "记录生活点滴，留存珍贵瞬间"
   author = "St.Kenrith"
 
