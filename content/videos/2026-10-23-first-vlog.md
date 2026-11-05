@@ -1,14 +1,15 @@
 ---
 title: 因為熱愛，所以堅持
 description: 騎行入坑一年，記錄一下。
-date: 2026-10-30
-cover: /covers/20260620.jpg
-duration: '03:58'
+date: 2026-11-4
+cover: /covers/IMG_012281.jpg
+duration: '03:52'
 location: 
 tags: [日常, 騎行]
 video:
-  type: bilibili
-  bvid: BV1t8xP6bEfi
+  type: r2
+  src: videos/Cycling Diary2026.mp4
+  poster: /covers/IMG_012281.jpg
 ---
 
 ## 逐風而行
