@@ -31,7 +31,8 @@ disableKinds = ["taxonomy", "term"]
 #  下面这些是「网站信息」，改完全站生效
 # ============================================================
 [params]
-  mediaBase = "https://media.caiaiolos.com"
+  # 已修复：删除了下面重复的 mediaBase，并修正了域名拼写
+  mediaBase = "https://media.canaiolos.com"
   description = "记录生活点滴，留存珍贵瞬间"
   author = "St.Kenrith"
 
@@ -41,10 +42,6 @@ disableKinds = ["taxonomy", "term"]
   giscusRepoId = ""
   giscusCategory = "General"
   giscusCategoryId = ""
-
-  # Cloudflare R2 的公开访问地址，例如 "https://media.你的域名.com"
-  # 填了之后，文章里写 videos/xxx.mp4 就会自动拼成完整地址
-  mediaBase = ""
 
   # 如果放在中国大陆服务器，填备案号；否则留空
   icp = ""
