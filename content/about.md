@@ -17,7 +17,7 @@ description: 关于我和这个网站。
 
 ## 联系我
 
-想聊天可以在任意一期下面留言，或者发邮件到 [hello@example.com](mailto:hello@example.com)（记得换成你自己的邮箱）。
+想聊天可以在任意一期下面留言，或者发邮件到 [canaiolos@msn.com](mailto:hello@example.com)（记得换成你自己的邮箱）。
 
 ## 隐私说明
 
