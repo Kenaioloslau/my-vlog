@@ -9,7 +9,6 @@ tags: ["日常", "騎行"]
 video:
   type: r2
   src: https://media.canaiolos.com/Cycling%20Diary2026.mp4
-  poster: /covers/20260620.jpg
 ---
 
 ## 逐風而行
