@@ -8,6 +8,7 @@ baseURL = "https://canaiolos.com/"
 locale = "zh-CN"
 defaultContentLanguage = "zh"
 title = "風與海的傳說"
+theme = "PaperMod"
 
 # 我们自己写了 static/robots.txt，所以不让 Hugo 自动生成
 enableRobotsTXT = false
@@ -38,10 +39,10 @@ disableKinds = ["taxonomy", "term"]
 
   # 评论系统 Giscus：四个值都填了才会显示评论区
   # 怎么拿到这四个值，见项目根目录的 README.md
-  giscusRepo = ""
-  giscusRepoId = ""
-  giscusCategory = "General"
-  giscusCategoryId = ""
+  giscusRepo = "Kenaioloslau/my-vlog"
+  giscusRepoId = "R_kgDOVg06zA"
+  giscusCategory = "Comments"
+  giscusCategoryId = "DIC_kwDOVg06zM4DKgg3"
 
   # 如果放在中国大陆服务器，填备案号；否则留空
   icp = ""
