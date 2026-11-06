@@ -1,0 +1,22 @@
+/* 首页背景图 - 适配 PaperMod */
+.list-profile, 
+#top {
+  background-image: url("/images/home-bg.jpg"); /* 如果图片在R2，替换为完整URL */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* 滚动时背景固定，营造视差感 */
+}
+
+/* 添加半透明遮罩，防止背景图干扰文字阅读 */
+.list-profile::before,
+#top::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* 黑色半透明遮罩，数值越大背景越暗 */
+  z-index: -1; /* 确保遮罩在背景图之下，内容之上 */
+}
