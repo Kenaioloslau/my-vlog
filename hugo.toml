@@ -8,7 +8,6 @@ baseURL = "https://canaiolos.com/"
 locale = "zh-CN"
 defaultContentLanguage = "zh"
 title = "風與海的傳說"
-theme = "PaperMod"
 
 # 我们自己写了 static/robots.txt，所以不让 Hugo 自动生成
 enableRobotsTXT = false
