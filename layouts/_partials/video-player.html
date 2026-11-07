@@ -46,7 +46,7 @@
       </video>
     </div>
   {{- end }}
-{{- else }}
+{{- else if eq .Section "videos" }}
   <div class="player-hint">
     ⚠️ 这期内容的视频还没配置好。请在这篇文章开头的 frontmatter 里填写
     <code>video.bvid</code>（B 站）或 <code>video.src</code>（R2 文件路径）。
