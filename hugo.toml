@@ -33,7 +33,7 @@ disableKinds = ["taxonomy", "term"]
 [params]
   # 已修复：删除了下面重复的 mediaBase，并修正了域名拼写
   mediaBase = "https://media.canaiolos.com"
-  description = "记录生活点滴，留存珍贵瞬间"
+  description = ""
   author = "St.Kenrith"
 
   # 评论系统 Giscus：四个值都填了才会显示评论区
