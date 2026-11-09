@@ -1,6 +1,11 @@
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="{{ "" | relURL }}">{{ substr .Site.Title 0 2 }}<span>{{ substr .Site.Title 2 }}</span></a>
+   <a class="brand" href="{{ "" | relURL }}" style="display: flex; align-items: center; gap: 8px;">
+  {{- with site.Params.label.icon }}
+    <img src="{{ . | absURL }}" alt="logo" height="{{ site.Params.label.iconHeight | default "30" }}">
+  {{- end }}
+  <span>{{ substr .Site.Title 0 30 }}</span>
+</a>
     <nav class="nav" aria-label="主导航">
       {{- range .Site.Menus.main }}
         {{- $url := .URL }}
