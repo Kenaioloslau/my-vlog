@@ -11,7 +11,6 @@ video:
   src: https://media.canaiolos.com/Cycling%20Diary2026.mp4
 ---
 
-## 逐風而行
 
 騎行入坑一年，本來是為了鍛鍊、減肥而開始，現在是徹底愛上這項運動。
 
