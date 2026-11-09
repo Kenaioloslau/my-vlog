@@ -7,8 +7,6 @@ tags: ["日常", "反詐"]
 video:
   type: "photo"  # ⚠️ 核心配置，告诉模板这是纯图文
 ---
-謹防詐騙
-
 ![收到的詐騙短信](https://media.canaiolos.com/images/Fraud-01.jpg)
 
 昨天上午突然收到一條短信，大意就是我名下的車輛存在質量問題，需要召回維修。
