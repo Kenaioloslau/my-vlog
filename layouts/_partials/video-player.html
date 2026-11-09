@@ -46,6 +46,9 @@
       </video>
     </div>
   {{- end }}
+{{- else if eq $type "photo" }}
+  {{/* 如果 type 是 photo，这里故意留空，什么都不渲染，警告框彻底消失 */}}
+
 {{- else if eq .Section "videos" }}
   <div class="player-hint">
     ⚠️ 这期内容的视频还没配置好。请在这篇文章开头的 frontmatter 里填写
