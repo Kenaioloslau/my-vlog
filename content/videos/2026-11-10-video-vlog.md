@@ -1,6 +1,6 @@
 ---
 title: 晨練
-description: 入冬第一騎。
+description: 入冬第一騎
 date: "2026-11-10"
 cover: /covers/20261110.jpg
 duration: '00:37'
