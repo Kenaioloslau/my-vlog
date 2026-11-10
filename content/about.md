@@ -1,6 +1,6 @@
 ---
 title: 關於我
-description: 關於我和這個網站。
+description: 關於我和這個網站
 date: "2026-10-23"
 ---
 
