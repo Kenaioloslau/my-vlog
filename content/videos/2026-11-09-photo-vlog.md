@@ -1,6 +1,6 @@
 ---
 title: 謹防詐騙
-description: 收到詐騙短信需要謹慎處理。
+description: 收到不明短信需要謹慎處理
 date: 2026-11-09
 cover: /covers/fraud.jpg  # 列表页封面图
 tags: ["日常", "反詐"]
