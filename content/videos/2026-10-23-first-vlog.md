@@ -1,6 +1,6 @@
 ---
 title: 因為熱愛，所以堅持
-description: 騎行入坑一年，記錄一下。
+description: 騎行入坑一年，記錄一下
 date: "2026-11-04"
 cover: /covers/20260620.jpg
 duration: '03:52'
