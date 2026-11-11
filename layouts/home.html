@@ -3,14 +3,19 @@
 {{- $latest := first 6 $pages -}}
 <div class="wrap">
   <section class="hero">
-    <h1>把日子拍下来，<br />就不算白过。</h1>
+    <!-- 👇 修改这里更换大标题 👇 -->
+    <h1>把日子拍下來<br />就不算白過</h1>
+    
     <p>{{ site.Params.description }}</p>
-    <div class="meta">
+    
+    <!-- 👇 小字部分：加了强制内联样式，保证绝对清晰 👇 -->
+    <div class="meta" style="display: flex; align-items: center; gap: 12px; color: #ffffff !important; opacity: 1 !important; font-weight: 500; font-size: 1.05rem; text-shadow: 0 2px 4px rgba(0,0,0,0.9); background: rgba(0,0,0,0.3); padding: 6px 16px; border-radius: 20px; width: fit-content;">
       <span>已更新 {{ len $pages }} 期</span>
       {{- with index $latest 0 }}
         <span>最近更新 {{ .Date.Format "2006 年 1 月" }}</span>
       {{- end }}
-      <a href="{{ "index.xml" | relURL }}">RSS 订阅</a>
+      <!-- 链接颜色改为醒目的黄色，并加了阴影 -->
+      <a href="{{ "index.xml" | relURL }}" style="color: #ffb703 !important; text-decoration: underline !important; text-underline-offset: 4px; text-shadow: 0 2px 4px rgba(0,0,0,0.9);">RSS 订阅</a>
     </div>
   </section>
 
