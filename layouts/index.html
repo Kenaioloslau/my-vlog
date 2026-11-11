@@ -1,0 +1,30 @@
+{{ define "main" }}
+{{- $copy := index .Site.Data.home .Site.Language.Lang -}}
+{{- $posts := first 4 (where .Site.RegularPages.ByDate.Reverse "Section" "videos") -}}
+
+<section class="editorial-hero">
+  <p class="editorial-eyebrow">{{ $copy.hero.eyebrow }}</p>
+  <h1>{{ $copy.hero.title }}</h1>
+  <p class="editorial-intro">{{ $copy.hero.intro }}</p>
+</section>
+
+<section class="latest-posts">
+  <h2 class="section-label">最新發佈</h2>
+  <div class="post-grid">
+    {{- range $index, $post := $posts }}
+    <article class="post-card" data-aos="fade-up" data-aos-delay="{{ mul $index 100 }}">
+      {{- with $post.Params.cover }}
+      <a href="{{ $post.RelPermalink }}" class="post-card-cover">
+        <img src="{{ . }}" alt="{{ $post.Title }}" loading="lazy">
+      </a>
+      {{- end }}
+      <div class="post-card-body">
+        <h3><a href="{{ $post.RelPermalink }}">{{ $post.Title }}</a></h3>
+        <p class="post-card-summary">{{ $post.Summary | plainify | truncate 80 }}</p>
+        <time datetime="{{ $post.Date.Format "2006-01-02" }}">{{ $post.Date.Format "2006年01月02日" }}</time>
+      </div>
+    </article>
+    {{- end }}
+  </div>
+</section>
+{{ end }}
