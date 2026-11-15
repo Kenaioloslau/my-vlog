@@ -14,7 +14,7 @@ date: "2026-10-23"
 
 ## 聯繫我
 
-想聊天可以在任意一期下留言，或者發郵件到 [canaiolos@msn.com](mailto:canaiolos@msn.com)。
+想聊天可以在任意一期下留言，或者發郵件到 [Hd_purple@hotmail.com](mailto:Hd_purple@hotmail.com)。
 
 ## 隱私說明
 
