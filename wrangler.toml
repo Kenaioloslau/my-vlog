@@ -8,7 +8,6 @@ database_name = "ziscus-comments"
 database_id = "10f25a34-982c-496a-b2a8-d83c1a4e03ee"
 
 [vars]
-ALLOWED_ORIGINS = "canaiolos.com"
+ALLOWED_ORIGINS = "canaiolos.com,localhost:1313"
 MODERATION = "off"
 RATE_LIMIT = "30"
-GITHUB_REPO = "Kenaioloslau/my-vlog"  # 你的GitHub仓库
