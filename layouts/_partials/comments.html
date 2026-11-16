@@ -1,9 +1,10 @@
 <div id="ziscus-comments" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border);">
   <h3>留言板</h3>
   
-  <!-- 评论表单 -->
-  <form id="comment-form" action="https://ziscus-comments.canaiolos.workers.dev" method="POST" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px;">
-    <input type="hidden" name="page_id" value="{{ .RelPermalink }}">
+  <!-- 评论表单：action 指向 /submit，隐藏字段改为 slug -->
+  <form id="comment-form" action="https://ziscus-comments.canaiolos.workers.dev/submit" method="POST" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px;">
+    <!-- ⚠️ 关键修正：name 改为 "slug"，值为当前文章的唯一标识 -->
+    <input type="hidden" name="slug" value="{{ .RelPermalink }}">
     
     <div style="display: flex; gap: 10px;">
       <input type="text" name="author" placeholder="您的暱稱 (必填)" required style="flex: 1; padding: 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--entry); color: var(--primary);">
@@ -15,7 +16,6 @@
     <button type="submit" style="align-self: flex-start; padding: 10px 24px; background: var(--primary); color: var(--theme); border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">提交留言</button>
   </form>
 
-  <!-- 评论区展示 (Ziscus 的零 JS 特性，如果你需要即时刷新，可以加一点简单的 JS，这里先用纯表单) -->
   <div id="comment-list">
     <p style="color: var(--secondary); font-size: 0.9em;">留言提交後須經站長審核才會公開顯示。</p>
   </div>
