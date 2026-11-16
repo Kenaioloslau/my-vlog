@@ -1,0 +1,22 @@
+<div id="ziscus-comments" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border);">
+  <h3>留言板</h3>
+  
+  <!-- 评论表单 -->
+  <form id="comment-form" action="https://ziscus-comments.canaiolos.workers.dev/api/comments" method="POST" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px;">
+    <input type="hidden" name="page_id" value="{{ .RelPermalink }}">
+    
+    <div style="display: flex; gap: 10px;">
+      <input type="text" name="author" placeholder="您的昵称 (必填)" required style="flex: 1; padding: 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--entry); color: var(--primary);">
+      <input type="email" name="email" placeholder="邮箱 (选填，不会公开)" style="flex: 1; padding: 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--entry); color: var(--primary);">
+    </div>
+    
+    <textarea name="content" placeholder="写下您的留言..." required rows="4" style="padding: 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--entry); color: var(--primary); resize: vertical;"></textarea>
+    
+    <button type="submit" style="align-self: flex-start; padding: 10px 24px; background: var(--primary); color: var(--theme); border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">提交留言</button>
+  </form>
+
+  <!-- 评论区展示 (Ziscus 的零 JS 特性，如果你需要即时刷新，可以加一点简单的 JS，这里先用纯表单) -->
+  <div id="comment-list">
+    <p style="color: var(--secondary); font-size: 0.9em;">留言提交后需经站长审核才会公开显示。</p>
+  </div>
+</div>
