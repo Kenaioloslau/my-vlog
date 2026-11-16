@@ -41,8 +41,8 @@ document.addEventListener('DOMContentLoaded', function() {
     try {
       // 直接发送原生 FormData，不要转 JSON
       const response = await fetch(form.action, {
-        method: 'POST',
-        body: formData // 让浏览器自动处理 multipart/form-data 和 Content-Type
+      method: 'POST',
+      body: formData // 直接传递 FormData 对象
       });
 
       if (response.ok) {
