@@ -1,5 +1,4 @@
 {{ define "main" }}
-{{- /* 找出同栏目里前后两期，用来做上下期导航 */ -}}
 {{- $all := (site.GetPage .Section).Pages.ByDate.Reverse -}}
 {{- $newer := "" -}}
 {{- $older := "" -}}
@@ -48,6 +47,7 @@
     </nav>
   {{- end }}
 
+  <!-- ✅ 全局唯一的留言板调用 -->
   {{ partial "comments.html" . }}
 </article>
 {{ end }}
