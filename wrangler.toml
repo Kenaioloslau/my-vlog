@@ -1,0 +1,13 @@
+name = "ziscus-comments"
+main = "worker.ts"
+compatibility_date = "2025-09-27"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ziscus-comments"
+database_id = "10f25a34-982c-496a-b2a8-d83c1a4e03ee"
+
+[vars]
+ALLOWED_ORIGINS = "canaiolos.com"
+MODERATION = "off"
+RATE_LIMIT = "30"
