@@ -39,31 +39,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const formData = new FormData(form);
     
     try {
-      // 1. 将 FormData 转换成普通的 JSON 对象
-      const data = Object.fromEntries(formData.entries());
-      
-      // 2. 发送标准的 JSON 请求
+      // 直接发送原生 FormData，不要转 JSON
       const response = await fetch(form.action, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json' // 👈 关键：告诉后端发送的是 JSON
-        },
-        body: JSON.stringify(data) // 👈 关键：把对象转成 JSON 字符串
+        body: formData // 让浏览器自动处理 multipart/form-data 和 Content-Type
       });
 
       if (response.ok) {
         alert('留言提交成功！等待站长审核后显示。');
-        form.reset(); // 提交成功清空表单
+        form.reset();
       } else {
         const errorText = await response.text();
         alert('提交失败：' + errorText);
       }
     } catch (error) {
-      alert('网络请求失败，请检查控制台 (F12) 报错信息。');
+      alert('网络请求失败，请检查控制台报错。');
       console.error('Fetch Error:', error);
-    } finally {
-      submitBtn.innerText = originalText;
-      submitBtn.disabled = false;
     }
   });
 });
