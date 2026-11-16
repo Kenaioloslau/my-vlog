@@ -1,4 +1,5 @@
 # 构建产物（Hugo 自动生成，不需要提交）
+node_modules/
 public/
 resources/
 .hugo_build.lock
