@@ -5,7 +5,7 @@ date: "2026-11-14"
 cover: /covers/20261114.jpg
 duration: '01:02'
 location: 
-tags: ["日常", "騎行"]
+tags: ["日常", "騎行", "風景"]
 video:
   type: r2
   src: https://media.canaiolos.com/2026-11-14-video-vlog.mp4
