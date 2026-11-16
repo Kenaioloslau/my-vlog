@@ -11,3 +11,4 @@ database_id = "10f25a34-982c-496a-b2a8-d83c1a4e03ee"
 ALLOWED_ORIGINS = "canaiolos.com"
 MODERATION = "off"
 RATE_LIMIT = "30"
+GITHUB_REPO = "Kenaioloslau/my-vlog"  # 你的GitHub仓库
