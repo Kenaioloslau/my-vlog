@@ -1,24 +1,20 @@
 {{/* ============================================================
-   自訂留言板（修正版）
+   ziscus 留言板（最终版）
    ------------------------------------------------------------
-   用法：整份替换 layouts/_partials/comments.html
+   后端：https://comments.canaiolos.com （ziscus Worker + D1）
 
-   做了三件事：
-   1. 样式改用本主题真实存在的 CSS 变量（--line / --card / --accent…）
-      原本用的 --border / --entry / --primary 在这个主题里根本不存在，
-      导致输入框没有边框、按钮没有底色，视觉上像不存在。
-   2. 提交结束后一定恢复按钮，不会再卡在「提交中…」。
-   3. 增加蜜罐字段 + 留言列表渲染（用 textContent，天然防 XSS）。
+   三条硬规则（来自 ziscus 0.7.0 源码，已实测验证）：
+   1. slug 必须是 ^[a-z0-9-]+$ —— 不能带斜杠、不能大写。
+      所以用 .Slug（如 2026-11-14-lighthouse），
+      不能用 .RelPermalink（/videos/xxx/ 会被 400 拒绝）。
+   2. 正文字段名是 body，不是 content。
+   3. 提交走原生表单 POST，服务端 302 跳回 redirect 指定的地址。
+      不需要 JS 拦截，也不需要 CORS。
 
-   後端契約（已實測確認）：
-   POST https://comments.canaiolos.com/submit
-        必要欄位：slug、author、body   ← 注意是 body，不是 content
-        錯誤碼：403 Invalid origin / 400 Missing slug / Missing author / Missing body
-   GET  https://comments.canaiolos.com/comments?slug=<路徑>
-        ← 需要自己在 Worker 里加，返回 JSON 數組：
-          [{ "author": "小王", "body": "好棒", "created_at": "2026-11-16" }]
-        未實現也能用：列表會靜默失敗，只顯示提示文字。
+   读取：GET /comments/<slug> 返回已通过的留言 JSON（已 HTML 转义）。
    ============================================================ */}}
+
+{{- $slug := path.Base (strings.TrimRight "/" .RelPermalink) -}}
 
 <style>
   #comments-block {
@@ -37,7 +33,7 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin-bottom: 36px;
+    margin: 28px 0 12px;
   }
 
   #comment-form .c-row {
@@ -52,7 +48,6 @@
   }
 
   #comment-form input[type='text'],
-  #comment-form input[type='email'],
   #comment-form textarea {
     flex: 1;
     width: 100%;
@@ -105,41 +100,17 @@
     transition: opacity 0.15s ease, transform 0.1s ease;
   }
 
-  #comment-form button:hover:not(:disabled) {
+  #comment-form button:hover {
     opacity: 0.86;
   }
 
-  #comment-form button:active:not(:disabled) {
+  #comment-form button:active {
     transform: translateY(1px);
-  }
-
-  #comment-form button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  #comment-status {
-    font-size: 13.5px;
-    color: var(--text-soft);
-  }
-
-  #comment-status.is-error {
-    color: var(--accent);
-  }
-
-  /* 蜜罐：真人看不见，机器人会填 */
-  #comment-form .c-hp {
-    position: absolute;
-    left: -9999px;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    pointer-events: none;
   }
 
   .c-note {
     color: var(--text-soft);
-    font-size: 14px;
+    font-size: 13.5px;
     margin: 0;
   }
 
@@ -181,140 +152,114 @@
 <div id="comments-block">
   <h3>留言板</h3>
 
-  <div id="comment-list" aria-live="polite">
-    <p class="c-note">留言提交後須經站長審核才會公開顯示。</p>
+  <div id="comment-list" data-slug="{{ $slug }}">
+    <p class="c-note">正在加载留言…</p>
   </div>
 
+  {{/* 原生表单：不拦截、不 fetch，浏览器直接 POST，服务端会 302 跳回本页 */}}
   <form
     id="comment-form"
-    action="https://comments.canaiolos.com/submit"
     method="POST"
-    style="margin-top: 32px"
+    action="https://comments.canaiolos.com/submit"
   >
-    <input type="hidden" name="slug" value="{{ .RelPermalink }}" />
-
-    {{/* 蜜罐欄位：正常訪客看不到，填了內容的一律視為機器人 */}}
-    <input class="c-hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+    {{/* slug 必须是 a-z 0-9 短横线，.Slug 正好符合 */}}
+    <input type="hidden" name="slug" value="{{ $slug }}" />
+    <input type="hidden" name="redirect" value="{{ .Permalink }}" />
 
     <div class="c-row">
-      <input type="text" name="author" placeholder="您的暱稱（必填）" required maxlength="40" />
-      <input type="email" name="email" placeholder="郵箱（選填，不會公開）" maxlength="120" />
+      <input
+        type="text"
+        name="author"
+        placeholder="您的暱稱（必填）"
+        required
+        maxlength="100"
+        autocomplete="nickname"
+      />
     </div>
 
-    <textarea name="body" placeholder="寫下您的留言…" required rows="4" maxlength="2000"></textarea>
+    <textarea
+      name="body"
+      placeholder="寫下您的留言…"
+      required
+      minlength="2"
+      maxlength="10000"
+      rows="4"
+    ></textarea>
 
     <div class="c-actions">
-      <button type="submit" id="submit-btn">提交留言</button>
-      <span id="comment-status" role="status"></span>
+      <button type="submit">提交留言</button>
+      <span class="c-note">留言會立即公開顯示</span>
     </div>
   </form>
 </div>
 
 <script>
   (function () {
-    var API_BASE = 'https://comments.canaiolos.com';
-    var form = document.getElementById('comment-form');
-    if (!form) return;
+    var box = document.getElementById('comment-list');
+    if (!box) return;
 
-    var btn = document.getElementById('submit-btn');
-    var statusEl = document.getElementById('comment-status');
-    var listEl = document.getElementById('comment-list');
-    var listLoaded = false;
+    var API = 'https://comments.canaiolos.com';
+    var slug = box.getAttribute('data-slug');
+    if (!slug) return;
 
-    function setStatus(msg, isError) {
-      statusEl.textContent = msg || '';
-      statusEl.className = isError ? 'is-error' : '';
+    /* 后端存的是 HTML 转义后的文本（escHtml）。
+       用 textarea 解码实体再以纯文本插入：既还原 < > & ，
+       又不会像 innerHTML 那样执行任何标签。 */
+    function decode(html) {
+      var t = document.createElement('textarea');
+      t.innerHTML = html;
+      return t.value;
     }
 
-    function resetBtn() {
-      btn.disabled = false;
-      btn.textContent = '提交留言';
-    }
-
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
-
-      // 蜜罐被填 = 機器人，靜默丟棄
-      if (form.website && form.website.value) return;
-
-      btn.disabled = true;
-      btn.textContent = '提交中…';
-      setStatus('');
-
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form)
-        });
-
-        if (res.ok) {
-          form.reset();
-          setStatus('✓ 已收到留言，審核通過後會顯示');
-          btn.textContent = '已提交';
-          listLoaded = false;
-          setTimeout(resetBtn, 4000);
-        } else {
-          const detail = await res.text();
-          setStatus('✗ 提交失敗（' + res.status + '）' + (detail ? '：' + detail.slice(0, 120) : ''), true);
-          resetBtn();
-        }
-      } catch (err) {
-        setStatus('✗ 網路異常，請確認連線後再試一次', true);
-        resetBtn();
-        console.error('[comments] submit failed:', err);
-      }
-    });
-
-    // ---- 渲染已審核的留言 ----
     function render(items) {
-      if (!items || !items.length) return;
+      if (!items || !items.length) {
+        box.innerHTML = '<p class="c-note">還沒有留言，歡迎寫下第一條。</p>';
+        return;
+      }
 
-      const frag = document.createDocumentFragment();
+      var frag = document.createDocumentFragment();
       items.forEach(function (c) {
-        const item = document.createElement('div');
+        var item = document.createElement('div');
         item.className = 'c-item';
 
-        const head = document.createElement('div');
+        var head = document.createElement('div');
         head.className = 'c-head';
 
-        const name = document.createElement('strong');
-        name.textContent = c.author || c.name || '匿名訪客';
+        var name = document.createElement('strong');
+        name.textContent = decode(c.author || '匿名');
 
-        const time = document.createElement('span');
+        var time = document.createElement('span');
         time.className = 'c-time';
-        time.textContent = c.created_at || c.date || '';
+        var d = c.created_at ? new Date(c.created_at) : null;
+        time.textContent = d && !isNaN(d.getTime()) ? d.toLocaleDateString('zh-Hant') : '';
 
         head.appendChild(name);
         head.appendChild(time);
 
-        const body = document.createElement('div');
+        var body = document.createElement('div');
         body.className = 'c-body';
-        // 關鍵：用 textContent 而不是 innerHTML，天然阻斷 XSS
-        body.textContent = c.body || c.content || '';
+        body.textContent = decode(c.body || '');
 
         item.appendChild(head);
         item.appendChild(body);
         frag.appendChild(item);
       });
 
-      listEl.replaceChildren(frag);
+      box.textContent = '';
+      box.appendChild(frag);
     }
 
-    async function loadComments() {
-      if (listLoaded) return;
-      try {
-        const url = API_BASE + '/comments?slug=' + encodeURIComponent(location.pathname);
-        const res = await fetch(url);
-        if (!res.ok) return; // 後端還沒做這個介面，維持預設提示
-        const data = await res.json();
-        const items = Array.isArray(data) ? data : data.comments || [];
-        listLoaded = true;
-        render(items);
-      } catch (err) {
-        // 靜默失敗：不影響提交，也不顯示錯誤
-      }
-    }
-
-    loadComments();
+    /* 后端对 GET 设了 max-age=60，加个时间戳绕过缓存，
+       否则刚提交完刷新可能还看到旧列表 */
+    fetch(API + '/comments/' + encodeURIComponent(slug) + '?t=' + Date.now(), {
+      cache: 'no-store'
+    })
+      .then(function (r) {
+        return r.ok ? r.json() : [];
+      })
+      .then(render)
+      .catch(function () {
+        box.innerHTML = '<p class="c-note">留言加載失敗，請重新整理頁面。</p>';
+      });
   })();
 </script>
