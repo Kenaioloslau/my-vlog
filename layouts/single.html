@@ -47,7 +47,7 @@
     </nav>
   {{- end }}
 
-  <!-- ✅ 全局唯一的留言板调用 -->
-  {{ partial "comments.html" . }}
-</article>
-{{ end }}
+    <!-- 只在文章页显示留言板；「關於我」等独立页面不显示 -->
+    {{ if eq .Section "videos" }}
+    {{ partial "comments.html" . }}
+  {{ end }}
