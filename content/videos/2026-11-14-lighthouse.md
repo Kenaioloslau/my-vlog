@@ -19,6 +19,6 @@ video:
 
 最後結算，共騎了82公里。有段時間沒騎這麼遠，盡興了。
 
-![以燈塔為背景](https://media.canaiolos.com/images/2026-11-14-cycling-02.JPG)
+![以燈塔為背景](https://media.canaiolos.com/images/2026-11-14-cycling-02.jpg)
 
 > 心情好，騎多遠都不覺得累。
