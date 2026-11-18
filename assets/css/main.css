@@ -527,7 +527,7 @@ main {
   flex-wrap: wrap;
   gap: 12px 22px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .site-footer nav {
