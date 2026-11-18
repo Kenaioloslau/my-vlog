@@ -8,7 +8,7 @@ location:
 tags: ["日常", "騎行"]
 video:
   type: r2
-  src: https://media.canaiolos.com/Cycling%20Diary2026.mp4
+  src: https://media.canaiolos.com/Cycling-2026.mp4
 ---
 
 
