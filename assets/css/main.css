@@ -554,3 +554,32 @@ main {
   white-space: nowrap;
   border: 0;
 }
+/* ===== 图片说明 ===== */
+.prose figure {
+  margin: 1.8em 0;
+  text-align: center;
+}
+
+.prose figure img {
+  margin: 0 auto;
+}
+
+.prose figure figcaption {
+  margin-top: 10px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-soft);
+}
+
+.prose figure figcaption p {
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.prose figure figcaption h4 {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
