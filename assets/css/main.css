@@ -583,3 +583,34 @@ main {
   font-weight: 600;
   color: var(--text);
 }
+/* ===== 文章页：封面作为标题区背景 ===== */
+.page-head--cover {
+  margin: 0 0 32px;
+  padding: 46px 30px 30px;
+  border-radius: var(--radius);
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.page-head--cover h1 {
+  color: #ffffff;
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.9),
+    0 0 30px rgba(0, 0, 0, 0.55);
+}
+
+.page-head--cover .page-meta,
+.page-head--cover .page-meta span,
+.page-head--cover .page-meta time {
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.85);
+}
+
+.page-head--cover .tag {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
