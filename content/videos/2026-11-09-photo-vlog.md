@@ -3,7 +3,7 @@ title: 謹防詐騙
 description: 收到不明短信需要謹慎處理
 date: 2026-11-09
 cover: /covers/fraud.jpg  # 列表页封面图
-tags: ["日常", "反詐"]
+tags: ["反詐"]
 video:
   type: "photo"  # ⚠️ 核心配置，告诉模板这是纯图文
 ---

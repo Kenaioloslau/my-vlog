@@ -5,7 +5,7 @@ date: "2026-11-04"
 cover: /covers/20260620.jpg
 duration: '03:52'
 location: 
-tags: ["日常", "騎行"]
+tags: ["騎行"]
 video:
   type: r2
   src: https://media.canaiolos.com/Cycling-2026.mp4
