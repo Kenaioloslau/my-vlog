@@ -9,47 +9,54 @@
   {{- end -}}
 {{- end -}}
 
-<article class="wrap">
-  <div class="page-head{{ with .Params.cover }} page-head--cover{{ end }}"{{ with .Params.cover }} style="background-image: linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.78) 100%), url('{{ . }}');"{{ end }}>
-    <h1>{{ .Title }}</h1>
-    <div class="page-meta">
-      <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "2006 年 1 月 2 日" }}</time>
-      {{- with .Params.location }}<span>📍 {{ . }}</span>{{ end }}
-      {{- with .Params.duration }}<span>⏱ {{ . }}</span>{{ end }}
-    </div>
-    {{- with .Params.tags }}
-      <div class="tags">
-        {{- range . }}<span class="tag">#{{ . }}</span>{{ end }}
+<article class="post">
+  <header class="post-hero{{ with .Params.cover }} has-cover{{ end }}"
+    {{ with .Params.cover }}style="background-image: linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,.88) 100%), url('{{ . }}');"{{ end }}>
+    <div class="post-hero-inner wrap">
+      <h1>{{ .Title }}</h1>
+      <div class="page-meta">
+        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "2006 年 1 月 2 日" }}</time>
+        {{- with .Params.location }}<span>📍 {{ . }}</span>{{ end }}
+        {{- with .Params.duration }}<span>⏱ {{ . }}</span>{{ end }}
       </div>
-    {{- end }}
+      {{- with .Params.tags }}
+        <div class="tags">
+          {{- range . }}<span class="tag">#{{ . }}</span>{{ end }}
+        </div>
+      {{- end }}
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="wrap">
+      {{ partial "video-player.html" . }}
+
+      <div class="prose">
+        {{ .Content }}
+      </div>
+
+      {{- if or $newer $older }}
+        <nav class="pager" aria-label="上一篇 / 下一篇">
+          {{- with $older }}
+            <a href="{{ .RelPermalink }}">
+              <span class="label">← 更早</span>
+              {{ .Title }}
+            </a>
+          {{- else }}<span></span>{{ end }}
+          {{- with $newer }}
+            <a class="next" href="{{ .RelPermalink }}">
+              <span class="label">更新 →</span>
+              {{ .Title }}
+            </a>
+          {{- else }}<span></span>{{ end }}
+        </nav>
+      {{- end }}
+
+      <!-- 只在文章页显示留言板 -->
+      {{- if eq .Section "videos" }}
+        {{ partial "comments.html" . }}
+      {{- end }}
+    </div>
   </div>
-
-  {{ partial "video-player.html" . }}
-
-  <div class="prose">
-    {{ .Content }}
-  </div>
-
-  {{- if or $newer $older }}
-    <nav class="pager" aria-label="上一篇 / 下一篇">
-      {{- with $older }}
-        <a href="{{ .RelPermalink }}">
-          <span class="label">← 更早</span>
-          {{ .Title }}
-        </a>
-      {{- else }}<span></span>{{ end }}
-      {{- with $newer }}
-        <a class="next" href="{{ .RelPermalink }}">
-          <span class="label">更新 →</span>
-          {{ .Title }}
-        </a>
-      {{- else }}<span></span>{{ end }}
-    </nav>
-  {{- end }}
-
-    <!-- 只在文章页显示留言板；「關於我」等独立页面不显示 -->
-    {{ if eq .Section "videos" }}
-    {{ partial "comments.html" . }}
-  {{ end }}
-  </article>
-  {{ end }}
+</article>
+{{ end }}

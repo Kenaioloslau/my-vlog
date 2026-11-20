@@ -583,34 +583,127 @@ main {
   font-weight: 600;
   color: var(--text);
 }
-/* ===== 文章页：封面作为标题区背景 ===== */
-.page-head--cover {
-  margin: 0 0 32px;
-  padding: 46px 30px 30px;
-  border-radius: var(--radius);
+
+/* ===== 文章页：封面 hero + 内容上滑覆盖 ===== */
+
+/* 基础样式（没有封面时用，比如「關於我」） */
+.post-hero {
+  margin-top: -48px;      /* 抵消 main 的上内边距，让顶端贴齐导航 */
+  padding: 8px 0 4px;
+}
+
+.post-hero-inner {
+  padding-top: 40px;
+  padding-bottom: 8px;
+}
+
+.post-hero h1 {
+  font-size: clamp(26px, 4.6vw, 36px);
+  line-height: 1.3;
+  margin: 0 0 12px;
+}
+
+.post-hero .page-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
+.page-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
+.post-hero .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.post-hero .tag {
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* 正文面板 */
+.post-body {
+  position: relative;
+  z-index: 1;
+  background: var(--bg);
+  padding-top: 40px;
+}
+
+/* ——— 有封面时：变成钉住的大图 ——— */
+.post-hero.has-cover {
+  position: sticky;
+  top: 60px;                 /* 让出顶部导航的高度 */
+  z-index: 0;
+  min-height: 66vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 120px 0 96px;
   background-size: cover;
   background-position: center 35%;
   background-repeat: no-repeat;
-  overflow: hidden;
+  background-color: var(--bg-soft);
 }
 
-.page-head--cover h1 {
+.post-hero.has-cover .post-hero-inner {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.post-hero.has-cover h1 {
   color: #ffffff;
+  font-size: clamp(30px, 5vw, 44px);
   text-shadow:
     0 2px 10px rgba(0, 0, 0, 0.9),
     0 0 30px rgba(0, 0, 0, 0.55);
 }
 
-.page-head--cover .page-meta,
-.page-head--cover .page-meta span,
-.page-head--cover .page-meta time {
+.post-hero.has-cover .page-meta,
+.post-hero.has-cover .page-meta span,
+.post-hero.has-cover .page-meta time {
   color: rgba(255, 255, 255, 0.92);
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.85);
 }
 
-.page-head--cover .tag {
+.post-hero.has-cover .tag {
   background: rgba(255, 255, 255, 0.18);
   color: #ffffff;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
+}
+
+/* 关键：内容面板上移 64px，盖住图片底部，形成"纸滑上来"的观感 */
+.post-hero.has-cover + .post-body {
+  margin-top: -64px;
+  border-radius: 26px 26px 0 0;
+  box-shadow: 0 -18px 44px rgba(0, 0, 0, 0.22);
+}
+
+/* 手机：图矮一点，圆角小一点，避免太占屏幕 */
+@media (max-width: 768px) {
+  .post-hero.has-cover {
+    min-height: 52vh;
+    padding: 88px 0 76px;
+  }
+
+  .post-hero.has-cover + .post-body {
+    margin-top: -44px;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .post-body {
+    padding-top: 32px;
+  }
 }
