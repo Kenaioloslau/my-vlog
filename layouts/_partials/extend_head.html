@@ -19,15 +19,16 @@
   .dark body {
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/home-bg.jpg');
   }
-    /* ===== 首页大标题：白字 + 深阴影，压在照片上也清晰 ===== */
+    /* ===== 首页大标题：天青色字 + 光晕，压在照片上也清晰 ===== */
   .hero h1 {
-    color: #ffffff;
+    color: #7dd3fc;
     font-weight: 800;
-    text-shadow:
-      0 2px 6px rgba(0, 0, 0, 0.9),
-      0 10px 30px rgba(0, 0, 0, 0.6);
 
-    /* 半透明底块，和下面「已更新…」那条保持一致 */
+    text-shadow:
+      0 0 28px rgba(125, 211, 252, 0.55),   /* 同色光晕 */
+      0 2px 6px rgba(0, 0, 0, 0.9),         /* 紧贴文字的深阴影，保证边缘清楚 */
+      0 10px 30px rgba(0, 0, 0, 0.6);       /* 大范围投影，把文字从背景里托起来 */
+
     display: inline-block;
     max-width: 100%;
     padding: 12px 24px;
