@@ -707,3 +707,15 @@ main {
     padding-top: 32px;
   }
 }
+
+/* 标签链接：鼠标移上去有反馈 */
+.tags a.tag {
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.tags a.tag:hover {
+  background: var(--accent);
+  color: #ffffff;
+  opacity: 1;
+}

@@ -19,9 +19,9 @@
         {{- with .Params.location }}<span>📍 {{ . }}</span>{{ end }}
         {{- with .Params.duration }}<span>⏱ {{ . }}</span>{{ end }}
       </div>
-      {{- with .Params.tags }}
+      {{- with .GetTerms "tags" }}
         <div class="tags">
-          {{- range . }}<span class="tag">#{{ . }}</span>{{ end }}
+          {{- range . }}<a class="tag" href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a>{{ end }}
         </div>
       {{- end }}
     </div>

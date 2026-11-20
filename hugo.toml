@@ -12,8 +12,8 @@ title = "風與海的傳說"
 # 我们自己写了 static/robots.txt，所以不让 Hugo 自动生成
 enableRobotsTXT = false
 
-# 关掉标签分类页，减少页面数量（标签仍然可以在文章里显示）
-disableKinds = ["taxonomy", "term"]
+# 只关掉「标签汇总页」(/tags/)，保留单个标签页 (/tags/骑行/)
+disableKinds = ["taxonomy"]
 
 # 每页显示多少个视频
 [pagination]
