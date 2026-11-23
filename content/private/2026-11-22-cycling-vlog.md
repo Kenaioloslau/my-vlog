@@ -6,8 +6,6 @@ cover: /gated-media/cover.jpg
 duration: ''
 location: 
 tags: []
-build:
-  list: never        # 可选：想让这期出现在首页和「全部文章」就删掉这两行，见附录 G
 video:
   type: r2
   src: /gated-media/2026-11-22-002.mp4

@@ -1,11 +1,16 @@
-{{- /* 视频卡片
-     调用方式：{{ partial "video-card.html" . }}（传一个 page 对象） */ -}}
+{{- /* 视频卡片：首页和列表页复用 */ -}}
+{{- $isPrivate := eq .Section "private" -}}
 {{- $cover := .Params.cover -}}
 {{- $coverUrl := "" -}}
 {{- with $cover }}{{ $coverUrl = partial "media-url.html" . }}{{ end -}}
 <a class="card" href="{{ .RelPermalink }}">
-  <div class="card-cover">
-    {{- if $coverUrl }}
+  <div class="card-cover{{ if $isPrivate }} card-cover--locked{{ end }}">
+    {{- if $isPrivate }}
+      <div class="lock">
+        <span class="lock-icon">🔒</span>
+        <span class="lock-text">需要密碼</span>
+      </div>
+    {{- else if $coverUrl }}
       <img src="{{ $coverUrl }}" alt="{{ .Title }}" loading="lazy" decoding="async" />
     {{- else }}
       <div class="empty">暂无封面</div>
@@ -18,6 +23,7 @@
     <div class="card-meta">
       <span>{{ .Date.Format "2006-01-02" }}</span>
       {{- with .Params.location }}<span>{{ . }}</span>{{ end }}
+      {{- if $isPrivate }}<span class="private-tag">🔒 私密</span>{{ end }}
     </div>
   </div>
 </a>

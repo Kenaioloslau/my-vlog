@@ -719,3 +719,38 @@ main {
   color: #ffffff;
   opacity: 1;
 }
+
+/* ===== 私密内容卡片 ===== */
+.card-cover--locked {
+  background: linear-gradient(135deg, var(--bg-soft) 0%, var(--accent-soft) 100%);
+  display: grid;
+  place-items: center;
+}
+
+.card-cover--locked .lock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-soft);
+}
+
+.card-cover--locked .lock-icon {
+  font-size: 26px;
+  line-height: 1;
+  opacity: 0.85;
+}
+
+.card-cover--locked .lock-text {
+  font-size: 12px;
+  letter-spacing: 0.05em;
+}
+
+.private-tag {
+  color: var(--accent);
+}
+
+.head-note {
+  font-size: 13px;
+  color: var(--text-soft);
+}

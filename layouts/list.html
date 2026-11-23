@@ -1,5 +1,8 @@
 {{ define "main" }}
 {{- $pages := .Pages.ByDate.Reverse -}}
+{{- if eq .Section "videos" -}}
+  {{- $pages = (where site.RegularPages "Section" "in" (slice "videos" "private")).ByDate.Reverse -}}
+{{- end -}}
 <div class="wrap">
   <div class="page-head">
     <h1>{{ .Title }}</h1>
