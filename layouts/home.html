@@ -48,17 +48,5 @@
       {{- end }}
     </div>
   {{- end }}
-  {{- $private := (where site.RegularPages "Section" "private").ByDate.Reverse }}
-  {{- if $private }}
-    <div class="section-head">
-      <h2>私密內容</h2>
-      <a href="{{ "private/" | relURL }}">查看全部 →</a>
-    </div>
-    <div class="grid">
-      {{- range first 3 $private }}
-        {{ partial "video-card.html" . }}
-      {{- end }}
-    </div>
-  {{- end }}
 </div>
 {{ end }}
