@@ -894,3 +894,46 @@ main {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
+
+/* ===== 手機端頂欄：改成兩行，五個標籤不再擠成一團 ===== */
+@media (max-width: 560px) {
+  .site-header .wrap {
+    flex-wrap: wrap;
+    height: auto;
+    padding-top: 10px;
+    row-gap: 0;
+  }
+
+  .brand {
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  .nav {
+    order: 3;
+    width: 100%;
+    margin-top: 6px;
+    padding: 9px 0 10px;
+    border-top: 1px solid var(--line);
+    gap: 20px;
+    font-size: 13px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav a {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 2px 0;
+  }
+
+  /* 顶栏变高了，封面 hero 改成贴顶吸附，避免被挡住 */
+  .post-hero.has-cover {
+    top: 0;
+  }
+}
