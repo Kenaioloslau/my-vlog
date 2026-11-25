@@ -875,3 +875,22 @@ main {
     padding: 8px 16px;
   }
 }
+
+/* ===== 私密页面的「私密內容」标签 ===== */
+.post-hero .private-tag {
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  text-decoration: none;
+  align-self: center;
+  white-space: nowrap;
+}
+
+.post-hero.has-cover .private-tag {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
