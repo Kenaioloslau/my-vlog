@@ -1,7 +1,9 @@
 {{- $desc := .Params.description | default .Site.Params.description -}}
 {{- $title := cond .IsHome .Site.Title (printf "%s · %s" .Title .Site.Title) -}}
 {{- $canonical := .Permalink -}}
-{{- $css := resources.Get "css/main.css" | minify | fingerprint -}}
+{{- $css := resources.Get "css/main.css" | minify -}}
+{{- $plain := resources.Get "css/main.css" | minify | resources.Copy "css/main.css" -}}
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,6 +29,6 @@
   <meta name="theme-color" content="#fdfcfa" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#16151a" media="(prefers-color-scheme: dark)" />
   <meta name="generator" content="Hugo {{ hugo.Version }}" />
-  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+  <link rel="stylesheet" href="{{ $plain.RelPermalink }}?v={{ $css.Content | md5 }}" />
   {{ partial "extend_head.html" . }}
 </head>
