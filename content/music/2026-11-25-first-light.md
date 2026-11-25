@@ -3,8 +3,8 @@ title: Final Furlong
 description: 動感、節奏感極強，彷彿一位騎手在奮力衝刺
 date: 2026-11-25
 cover: /covers/final-furlong-cover.jpg
-duration: '04:18'
-genre: 熱血搖滾
+duration: '04:17'
+genre: 搖滾
 tags: ["原創"]
 audio: music/final-furlong.mp3
 download: true
