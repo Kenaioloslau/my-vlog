@@ -65,6 +65,11 @@ disableKinds = ["taxonomy"]
   weight = 25
 
 [[menu.main]]
+  name = "私密內容"
+  pageRef = "/private"
+  weight = 28
+
+[[menu.main]]
   name = "關於我"
   pageRef = "/about"
   weight = 30

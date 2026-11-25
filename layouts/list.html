@@ -1,8 +1,5 @@
 {{ define "main" }}
 {{- $pages := .Pages.ByDate.Reverse -}}
-{{- if eq .Section "videos" -}}
-  {{- $pages = (where site.RegularPages "Section" "in" (slice "videos" "private")).ByDate.Reverse -}}
-{{- end -}}
 {{- $hero := .Params.hero }}
 <section class="section-hero{{ if $hero }} has-bg{{ end }}"
   {{- with $hero }} style="background-image: linear-gradient(180deg, rgba(0,0,0,.20) 0%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.88) 100%), url('{{ partial "media-url.html" . }}');"{{ end }}>

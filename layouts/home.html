@@ -52,10 +52,10 @@
   {{- if $private }}
     <div class="section-head">
       <h2>私密內容</h2>
-      <span class="head-note">共 {{ len $private }} 期 · 需要密碼</span>
+      <a href="{{ "private/" | relURL }}">查看全部 →</a>
     </div>
     <div class="grid">
-      {{- range $private }}
+      {{- range first 3 $private }}
         {{ partial "video-card.html" . }}
       {{- end }}
     </div>
