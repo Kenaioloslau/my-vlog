@@ -50,26 +50,26 @@ disableKinds = ["taxonomy"]
 #  顶部导航菜单
 # ============================================================
 [[menu.main]]
-  name = "首頁"
+  name = "home"
   pageRef = "/"
   weight = 10
 
 [[menu.main]]
-  name = "全部文章"
+  name = "vlog"
   pageRef = "/videos"
   weight = 20
 
 [[menu.main]]
-  name = "音樂"
+  name = "music"
   pageRef = "/music"
   weight = 25
 
 [[menu.main]]
-  name = "私密內容"
+  name = "private"
   pageRef = "/private"
   weight = 28
 
 [[menu.main]]
-  name = "關於我"
+  name = "about"
   pageRef = "/about"
   weight = 30
