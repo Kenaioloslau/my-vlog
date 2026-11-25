@@ -18,7 +18,7 @@
         <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "2006 年 1 月 2 日" }}</time>
         {{- with .Params.location }}<span>📍 {{ . }}</span>{{ end }}
         {{- with .Params.duration }}<span>⏱ {{ . }}</span>{{ end }}
-        {{- if eq .Section "private" }}<a class="private-tag" href="{{ "private/" | relURL }}">🔒 私密內容</a>{{ end }}
+        {{- if eq .Section "private" }}<a class="private-tag" href="{{ "private/" | relURL }}">🔒 私密</a>{{ end }}
       </div>
       {{- with .GetTerms "tags" }}
         <div class="tags">
