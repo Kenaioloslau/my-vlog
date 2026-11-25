@@ -36,6 +36,18 @@
     </div>
     {{- end }}
 
+  {{- $music := first 3 (where site.RegularPages "Section" "music").ByDate.Reverse }}
+  {{- if $music }}
+    <div class="section-head">
+      <h2>音樂</h2>
+      <a href="{{ "music/" | relURL }}">全部曲子 →</a>
+    </div>
+    <div class="grid">
+      {{- range $music }}
+        {{ partial "music-card.html" . }}
+      {{- end }}
+    </div>
+  {{- end }}
   {{- $private := (where site.RegularPages "Section" "private").ByDate.Reverse }}
   {{- if $private }}
     <div class="section-head">

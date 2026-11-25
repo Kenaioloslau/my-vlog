@@ -1,0 +1,25 @@
+{{- /* 音乐播放器：读 frontmatter 的 audio
+       audio: music/first-light.mp3   <- R2 相对路径（推荐）
+       audio: https://.../x.mp3       <- 外部直链也可以
+       download: true                 -> 显示下载按钮                      */ -}}
+{{- $page := . -}}
+{{- $raw := strings.TrimPrefix "/" (.Params.audio | default "") -}}
+{{- if $raw }}
+  {{- $src := partial "media-url.html" $raw -}}
+  <div class="audio-player">
+    <audio controls preload="metadata" src="{{ $src }}">
+      你的浏览器不支持音频播放，可以<a href="{{ $src }}">点这里直接播放</a>。
+    </audio>
+    {{- if $page.Params.download }}
+      {{- if hasPrefix $raw "http" }}
+        <a class="audio-dl" href="{{ $src }}" download>⬇ 下載</a>
+      {{- else }}
+        <a class="audio-dl" href="{{ "dl/" | relURL }}{{ $raw }}" download="{{ path.Base $raw }}">⬇ 下載 MP3</a>
+      {{- end }}
+    {{- end }}
+  </div>
+{{- else if eq $page.Section "music" }}
+  <div class="player-hint">
+    ⚠️ 这首曲子还没配置音频文件。请在 frontmatter 里填写 <code>audio: music/文件名.mp3</code>。
+  </div>
+{{- end }}

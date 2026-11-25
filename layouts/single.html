@@ -29,7 +29,11 @@
 
   <div class="post-body">
     <div class="wrap">
-      {{ partial "video-player.html" . }}
+      {{- if eq .Section "music" }}
+        {{ partial "audio-player.html" . }}
+      {{- else }}
+        {{ partial "video-player.html" . }}
+      {{- end }}
 
       <div class="prose">
         {{ .Content }}

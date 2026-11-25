@@ -60,6 +60,11 @@ disableKinds = ["taxonomy"]
   weight = 20
 
 [[menu.main]]
+  name = "音樂"
+  pageRef = "/music"
+  weight = 25
+
+[[menu.main]]
   name = "關於我"
   pageRef = "/about"
   weight = 30
