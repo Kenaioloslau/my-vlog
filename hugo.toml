@@ -55,7 +55,7 @@ disableKinds = ["taxonomy"]
   weight = 10
 
 [[menu.main]]
-  name = "日誌"
+  name = "文章"
   pageRef = "/videos"
   weight = 20
 
