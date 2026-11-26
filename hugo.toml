@@ -55,7 +55,7 @@ disableKinds = ["taxonomy"]
   weight = 10
 
 [[menu.main]]
-  name = "日誌"
+  name = "全部日誌"
   pageRef = "/videos"
   weight = 20
 
@@ -65,7 +65,7 @@ disableKinds = ["taxonomy"]
   weight = 25
 
 [[menu.main]]
-  name = "私密"
+  name = "事件視界"
   pageRef = "/private"
   weight = 28
 
