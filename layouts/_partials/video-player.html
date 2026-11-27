@@ -39,6 +39,7 @@
     {{- $src := partial "media-url.html" $v.src -}}
     {{- $poster := "" -}}
     {{- with $v.poster }}{{ $poster = partial "media-url.html" . }}{{ end -}}
+    {{- if not $poster }}{{ with $.Params.cover }}{{ $poster = partial "media-url.html" . }}{{ end }}{{ end -}}
     <div class="player">
       <video controls playsinline preload="metadata"{{ with $poster }} poster="{{ . }}"{{ end }}>
         <source src="{{ $src }}" type="video/mp4" />
