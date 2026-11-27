@@ -16,14 +16,15 @@
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
   <meta property="og:site_name" content="{{ .Site.Title }}" />
   <meta property="og:title" content="{{ $title }}" />
   <meta property="og:description" content="{{ $desc }}" />
   <meta property="og:url" content="{{ $canonical }}" />
-  {{- with .Params.cover }}
-  <meta property="og:image" content="{{ partial "media-url.html" . | absURL }}" />
-  {{- end }}
+  {{- $og := "" -}}
+  {{- with .Params.cover }}{{ $og = partial "media-url.html" . }}{{ end -}}
+  {{- if not $og }}{{ $og = "images/og-default.jpg" }}{{ end }}
+  <meta property="og:image" content="{{ $og | absURL }}" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <meta name="theme-color" content="#fdfcfa" media="(prefers-color-scheme: light)" />
