@@ -37,6 +37,49 @@
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
   }
+
+  /* ===== 首页副标题：深色底板 + 白字，压在照片上也清楚 ===== */
+  .hero p {
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.6;
+    display: inline-block;
+    max-width: 100%;
+    margin: 0;
+    padding: 10px 18px;
+    border-radius: 14px;
+    background: rgba(0, 0, 0, 0.38);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    text-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.95),
+      0 6px 22px rgba(0, 0, 0, 0.55);
+  }
+
+  /* ===== 页脚：改白字 + 底部渐深，避免被照片吃掉 ===== */
+  .site-footer {
+    color: #ffffff;
+    border-top-color: rgba(255, 255, 255, 0.22);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+    text-shadow:
+      0 1px 4px rgba(0, 0, 0, 0.9),
+      0 6px 20px rgba(0, 0, 0, 0.55);
+  }
+
+  .site-footer a,
+  .site-footer nav a {
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .site-footer a:hover,
+  .site-footer nav a:hover {
+    color: #ffffff;
+  }
+
+  .site-footer nav a + a::before {
+    color: rgba(255, 255, 255, 0.45);
+  }
 </style>
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
