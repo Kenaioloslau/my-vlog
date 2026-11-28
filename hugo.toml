@@ -33,7 +33,7 @@ disableKinds = ["taxonomy"]
 [params]
   # 已修复：删除了下面重复的 mediaBase，并修正了域名拼写
   mediaBase = "https://media.canaiolos.com"
-  description = "記錄生活中的難忘時刻"
+  description = "騎行、旅遊、音樂⋯⋯你想看的都能在這找到"
   author = "St.Kenrith"
 
   # 如果放在中国大陆服务器，填备案号；否则留空
