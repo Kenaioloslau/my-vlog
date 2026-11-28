@@ -1,5 +1,8 @@
 {{ define "main" }}
-{{- $all := (site.GetPage .Section).Pages.ByDate.Reverse -}}
+{{- $all := slice -}}
+{{- if in (slice "videos" "music" "private") .Section -}}
+  {{- $all = (site.GetPage .Section).Pages.ByDate.Reverse -}}
+{{- end -}}
 {{- $newer := "" -}}
 {{- $older := "" -}}
 {{- range $i, $p := $all -}}

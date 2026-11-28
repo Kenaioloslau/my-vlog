@@ -980,3 +980,10 @@ main {
 .site-footer nav a:hover {
   color: var(--accent);
 }
+
+/* 链接之间的分隔点 */
+.site-footer nav a + a::before {
+  content: "·";
+  margin-right: 14px;
+  color: var(--line);
+}
