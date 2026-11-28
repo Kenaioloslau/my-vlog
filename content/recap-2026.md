@@ -1,7 +1,7 @@
 ---
 title: 2026 年回顧
 description: 這一年發了 9 期日誌、2 首曲子
-date: 2026-12-31
+date: 2026-11-28
 cover: /covers/2026-recap.jpg
 ---
 
