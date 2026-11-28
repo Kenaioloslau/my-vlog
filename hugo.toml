@@ -65,11 +65,6 @@ disableKinds = ["taxonomy"]
   weight = 25
 
 [[menu.main]]
-  name = "歸檔"
-  pageRef = "/archive"
-  weight = 26
-
-[[menu.main]]
   name = "事件視界"
   pageRef = "/private"
   weight = 28

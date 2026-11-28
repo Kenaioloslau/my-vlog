@@ -971,3 +971,12 @@ main {
 .archive-list time { font-size: 13px; color: var(--text-soft); font-variant-numeric: tabular-nums; }
 .archive-list a { flex: 1; }
 .archive-kind { font-size: 12px; color: var(--text-soft); }
+
+.site-footer nav a {
+  color: var(--text-soft);
+  text-decoration: none;
+}
+
+.site-footer nav a:hover {
+  color: var(--accent);
+}
